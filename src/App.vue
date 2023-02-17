@@ -46,15 +46,15 @@
         <div class="basic-button" @click="pushNumber(4)">4</div>
         <div class="basic-button" @click="pushNumber(5)">5</div>
         <div class="basic-button" @click="pushNumber(6)">6</div>
-        <div class="basic-button" @click="addUp">+</div>
+        <div class="basic-button" @click="pushModifier('+')">+</div>
         <div class="basic-button" @click="pushNumber(1)">1</div>
         <div class="basic-button" @click="pushNumber(2)">2</div>
         <div class="basic-button" @click="pushNumber(3)">3</div>
-        <div class="basic-button" @click="subtract">-</div>
+        <div class="basic-button" @click="pushModifier('-')">-</div>
         <div class="basic-button" @click="pushComma('.')">.</div>
         <div class="basic-button" @click="pushNumber(0)">0</div>
-        <div class="basic-button" @click="divide">/</div>
-        <div class="basic-button" @click="multiply">x</div>
+        <div class="basic-button" @click="pushModifier('/')">/</div>
+        <div class="basic-button" @click="pushModifier('x')">x</div>
         <div
           class="col-start-1 col-end-3 cursor-pointer select-none rounded-md border-b-4 border-My-vivid-magenta bg-My-dark-violet pb-3.5 pt-5 text-center text-xl text-My-white hover:bg-fuchsia-500/50"
           @click="total.value = []"
@@ -114,68 +114,21 @@ function pushTotalInEquation() {
   }
   equation.push(Number(x));
 }
-function addUp() {
+
+function pushModifier(modifier: string) {
   const lastItem = equation[equation.length - 1];
-  // check if there is a modifier in last position of equation
+
   if (
     lastItem &&
     typeof lastItem === "string" &&
     ["-", "/", "x", "+"].includes(lastItem)
   ) {
     equation.pop();
-    equation.push("+");
+    equation.push(modifier);
     return;
   } else {
     pushTotalInEquation();
-    equation.push("+");
-  }
-}
-function multiply() {
-  const lastItem = equation[equation.length - 1];
-  // check if there is a modifier in last position of equation
-  if (
-    lastItem &&
-    typeof lastItem === "string" &&
-    ["-", "/", "x", "+"].includes(lastItem)
-  ) {
-    equation.pop();
-    equation.push("x");
-    return;
-  } else {
-    pushTotalInEquation();
-    equation.push("x");
-  }
-}
-function divide() {
-  const lastItem = equation[equation.length - 1];
-  // check if there is a modifier in last position of equation
-  if (
-    lastItem &&
-    typeof lastItem === "string" &&
-    ["-", "/", "x", "+"].includes(lastItem)
-  ) {
-    equation.pop();
-    equation.push("/");
-    return;
-  } else {
-    pushTotalInEquation();
-    equation.push("/");
-  }
-}
-function subtract() {
-  const lastItem = equation[equation.length - 1];
-  // check if there is a modifier in last position of equation
-  if (
-    lastItem &&
-    typeof lastItem === "string" &&
-    ["-", "/", "x", "+"].includes(lastItem)
-  ) {
-    equation.pop();
-    equation.push("-");
-    return;
-  } else {
-    pushTotalInEquation();
-    equation.push("-");
+    equation.push(modifier);
   }
 }
 </script>
