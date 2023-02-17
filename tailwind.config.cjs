@@ -20,12 +20,13 @@ module.exports = {
         'My-very-dark-violet-1': 'hsl(268, 75%, 9%)',
         'My-very-dark-violet-2': 'hsl(268, 71%, 12%)',
         //keys
+        'My-very-dark-violet-3': 'hsl(268, 47%, 21%)',
         'My-dark-violet': 'hsl(281, 89%, 26%)',
+        'My-dark-magenta': 'hsl(290, 70%, 36%)',
         'My-vivid-magenta': 'hsl(285, 91%, 52%)',
         'My-pure-cyan': 'hsl(176, 100%, 44%)',
         'My-soft-cyan': 'hsl(177, 92%, 70%)',
-        'My-very-dark-violet-3': 'hsl(268, 47%, 21%)',
-        'My-dark-magenta': 'hsl(290, 70%, 36%)',
+
         //text
         'My-light-yellow': 'hsl(52, 100%, 62%)',
         'My-very-dark-blue': 'hsl(198, 20%, 13%)',
