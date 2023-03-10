@@ -1,6 +1,6 @@
 <template>
-  <div class="min-h-screen w-full bg-My-very-dark-violet-1">
-    <div class="mx-auto w-[350px] flex-col pt-24 text-My-light-yellow">
+  <div class="min-h-screen w-full" :class="theme.background">
+    <div class="mx-auto w-[350px] flex-col pt-24" :class="theme.text">
       <!--   Header     -->
       <div class="flex justify-between">
         <h1 class="text-2xl">calc</h1>
@@ -16,7 +16,7 @@
             </ul>
             <Toggle
               :toggle="toggle"
-              @emitBoolean="(value) => (this.toggle.value = value)"
+              @emitTheme="(value) => (toggle.value = value)"
             />
           </div>
         </div>
@@ -24,7 +24,8 @@
 
       <!--   Total number     -->
       <div
-        class="mt-8 rounded-xl bg-My-very-dark-violet-2 py-7 px-5 text-right text-4xl"
+        class="mt-8 rounded-xl py-7 px-5 text-right text-4xl"
+        :class="theme.screen"
       >
         <span v-if="current.operand.value !== ''">
           {{ current.operand.value }}
@@ -33,36 +34,132 @@
       </div>
 
       <!--   Buttons   -->
-      <div class="mt-4 grid grid-cols-4 gap-4 bg-My-very-dark-violet-2 p-5">
-        <div class="basic-button" @click="handleClick('7')">7</div>
-        <div class="basic-button" @click="handleClick('8')">8</div>
-        <div class="basic-button" @click="handleClick('9')">9</div>
+      <div
+        class="mt-4 grid grid-cols-4 gap-4 rounded-lg p-5"
+        :class="theme.calculator"
+      >
         <div
-          class="cursor-pointer select-none rounded-md border-b-4 border-My-vivid-magenta bg-My-dark-violet pb-3.5 pt-5 text-center text-xl text-My-white hover:bg-fuchsia-500/50"
+          class="basic-button"
+          :class="theme.button"
+          @click="handleClick('7')"
+        >
+          7
+        </div>
+        <div
+          class="basic-button"
+          :class="theme.button"
+          @click="handleClick('8')"
+        >
+          8
+        </div>
+        <div
+          class="basic-button"
+          :class="theme.button"
+          @click="handleClick('9')"
+        >
+          9
+        </div>
+        <div
+          class="cursor-pointer select-none rounded-md border-b-4 pb-3.5 pt-5 text-center text-xl"
+          :class="theme.delete"
           @click="handleClick('delete')"
         >
           DEL
         </div>
-        <div class="basic-button" @click="handleClick('4')">4</div>
-        <div class="basic-button" @click="handleClick('5')">5</div>
-        <div class="basic-button" @click="handleClick('6')">6</div>
-        <div class="basic-button" @click="handleClick('+')">+</div>
-        <div class="basic-button" @click="handleClick('1')">1</div>
-        <div class="basic-button" @click="handleClick('2')">2</div>
-        <div class="basic-button" @click="handleClick('3')">3</div>
-        <div class="basic-button" @click="handleClick('-')">-</div>
-        <div class="basic-button" @click="handleClick('.')">.</div>
-        <div class="basic-button" @click="handleClick('0')">0</div>
-        <div class="basic-button" @click="handleClick('/')">/</div>
-        <div class="basic-button" @click="handleClick('*')">x</div>
         <div
-          class="col-start-1 col-end-3 cursor-pointer select-none rounded-md border-b-4 border-My-vivid-magenta bg-My-dark-violet pb-3.5 pt-5 text-center text-xl text-My-white hover:bg-fuchsia-500/50"
+          class="basic-button"
+          :class="theme.button"
+          @click="handleClick('4')"
+        >
+          4
+        </div>
+        <div
+          class="basic-button"
+          :class="theme.button"
+          @click="handleClick('5')"
+        >
+          5
+        </div>
+        <div
+          class="basic-button"
+          :class="theme.button"
+          @click="handleClick('6')"
+        >
+          6
+        </div>
+        <div
+          class="basic-button"
+          :class="theme.button"
+          @click="handleClick('+')"
+        >
+          +
+        </div>
+        <div
+          class="basic-button"
+          :class="theme.button"
+          @click="handleClick('1')"
+        >
+          1
+        </div>
+        <div
+          class="basic-button"
+          :class="theme.button"
+          @click="handleClick('2')"
+        >
+          2
+        </div>
+        <div
+          class="basic-button"
+          :class="theme.button"
+          @click="handleClick('3')"
+        >
+          3
+        </div>
+        <div
+          class="basic-button"
+          :class="theme.button"
+          @click="handleClick('-')"
+        >
+          -
+        </div>
+        <div
+          class="basic-button"
+          :class="theme.button"
+          @click="handleClick('.')"
+        >
+          .
+        </div>
+        <div
+          class="basic-button"
+          :class="theme.button"
+          @click="handleClick('0')"
+        >
+          0
+        </div>
+        <div
+          class="basic-button"
+          :class="theme.button"
+          @click="handleClick('/')"
+        >
+          /
+        </div>
+        <div
+          class="basic-button"
+          :class="theme.button"
+          @click="handleClick('*')"
+        >
+          x
+        </div>
+        <div
+          class="col-start-1 col-end-3 cursor-pointer select-none rounded-md border-b-4 pb-3.5 pt-5 text-center text-xl"
+          :class="theme.reset"
           @click="handleClick('reset')"
         >
           RESET
         </div>
         <div
-          class="col-start-3 col-end-5 inline-block cursor-pointer select-none rounded-md border-b-4 border-My-soft-cyan bg-My-pure-cyan pb-3.5 pt-5 text-center align-middle text-xl text-black hover:bg-cyan-300"
+          class="col-start-3 col-end-5 inline-block cursor-pointer select-none rounded-md border-b-4 pb-3.5 pt-5 text-center align-middle text-xl"
+          :class="theme.equals"
           @click="handleClick('=')"
         >
           =
@@ -73,13 +170,45 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from "vue";
+import { reactive, watch } from "vue";
 import Toggle from "./components/Toggle.vue";
+
+let theme = reactive({
+  text: "text-theme1",
+  background: "background-theme1",
+  calculator: "calculator-theme1",
+  screen: "screen-theme1",
+  toggle: "toggle-theme1",
+  reset: "button1-theme1",
+  delete: "button1-theme1",
+  button: "button2-theme1",
+  equals: "button3-theme1",
+});
 
 let toggle = reactive({
   color: "bg-indigo-400",
-  value: false,
+  value: 1,
+  backgroundColor: theme.toggle,
+  bulletColor: theme.equals,
 });
+
+watch(
+  () => toggle.value,
+  (newValue) => {
+    theme.text = "text-theme" + newValue;
+    theme.background = "background-theme" + newValue;
+    theme.calculator = "calculator-theme" + newValue;
+    theme.screen = "screen-theme" + newValue;
+    theme.toggle = "toggle-theme" + newValue;
+    theme.button = "button2-theme" + newValue;
+    theme.equals = "button3-theme" + newValue;
+    theme.reset = "button1-theme" + newValue;
+    theme.delete = "button1-theme" + newValue;
+    toggle.backgroundColor = theme.toggle;
+    toggle.bulletColor = theme.equals;
+  }
+);
+
 let equation = "";
 let operator = "";
 let firstOperand = reactive({
@@ -171,11 +300,13 @@ function resetCalculator() {
   secondOperand.value = "";
   current.operand = firstOperand;
 }
+
 function setEquation() {
   let num1 = parseFloat(firstOperand.value);
   let num2 = parseFloat(secondOperand.value);
   equation = num1 + operator + num2;
 }
+
 function solveEquation() {
   answer.value = eval(equation).toString().slice(0, 16);
   firstOperand.value = answer.value;
@@ -192,120 +323,95 @@ function del() {
     );
   }
 }
-
-// function resetEquation() {
-//   equation.splice(0);
-//   operand.value.splice(0);
-// }
-//
-// function pushOperandInEquation() {
-//   let x: string = "";
-//
-//   if (operand.value.length === 0) {
-//     operand.value.push(0);
-//   }
-//
-//   for (let i = 0; i < operand.value.length; i++) {
-//     x += operand.value[i].toString();
-//   }
-//
-//   equation.push(Number(x));
-// }
-
-// function pushOperator(modifier: string) {
-//   const lastItem = equation[equation.length - 1];
-//   // checking if the last item is an operator, so we can replace the operator with the new one.
-//   if (
-//     lastItem &&
-//     typeof lastItem === "string" &&
-//     ["-", "/", "x", "+"].includes(lastItem)
-//   ) {
-//     equation.pop();
-//   }
-//   // checking if the first item in the equation is not a number
-//   if (typeof equation[0] !== "number") {
-//     pushOperandInEquation();
-//   }
-//   equation.push(modifier);
-//   // here we remove the operand, because we need to add the second part of the equation so t
-//   operand.value.splice(0);
-// }
-// function getDigitsArray(num: number): number[] {
-//   const digitsStr = num.toString(); // Convert number to string
-//   // Split string into array of characters, then convert each character to a number
-//   return digitsStr.split("").map(Number);
-// }
-
-// function evaluateEquation() {
-//   pushOperandInEquation();
-//
-//   while (equation.length > 1) {
-//     const left = equation.shift() as number;
-//     const operator = equation.shift() as string;
-//     const right = equation.shift() as number;
-//
-//     let result = 0;
-//     switch (operator) {
-//       case "+":
-//         result = left + right;
-//         break;
-//       case "-":
-//         result = left - right;
-//         break;
-//       case "x":
-//         result = left * right;
-//         break;
-//       case "/":
-//         result = left / right;
-//         break;
-//       default:
-//         break;
-//     }
-//
-//     let digits: string | any[] = [];
-//
-//     // if result is longer than 11 digits long
-//     if (result.toString().length > 11) {
-//       // make a rounded string from result
-//       digits = result.toFixed(8);
-//
-//       digits = digits.split("").map(Number);
-//
-//       // make a rounded number from result
-//       result = parseFloat(result.toFixed(8));
-//     } else {
-//       digits = result.toString();
-//       digits = digits.split("").map(Number);
-//     }
-//
-//     operand.value.splice(0);
-//
-//     // pushing all digits into operand
-//     for (let x = 0; x < digits.length; x++) {
-//       // here we check of the first digit is NaN. This means the first digit in result was a minus
-//       if (x === 0) {
-//         if (Number.isNaN(digits[x])) {
-//           digits[x] = "-";
-//           operand.value.push(digits[x]);
-//           continue;
-//         }
-//       }
-//       // here we check of the first digit is NaN. This means the first digit in result was a comma
-//       if (Number.isNaN(digits[x])) {
-//         digits[x] = ",";
-//         operand.value.push(digits[x]);
-//         continue;
-//       }
-//       operand.value.push(digits[x]);
-//     }
-//
-//     equation.push(result);
-//   }
-// }
 </script>
 
-<style scoped>
+<style>
 .basic-button {
-  @apply cursor-pointer select-none rounded-md border-b-4 border-My-dark-magenta bg-My-very-dark-violet-3 pt-4 pb-2.5 text-center align-middle text-4xl hover:bg-purple-600/90;
+  @apply cursor-pointer select-none rounded-md border-b-4 pt-4 pb-2.5 text-center align-middle text-4xl;
+}
+/* Theme 1 - Blue */
+
+.background-theme1 {
+  @apply bg-My-very-dark-desaturated-blue-background text-My-white;
+}
+.calculator-theme1 {
+  @apply bg-My-very-dark-desaturated-blue-background-toggle-keypad text-white;
+}
+.screen-theme1 {
+  @apply bg-My-very-dark-desaturated-blue-background-screen text-white;
+}
+.toggle-theme1 {
+  @apply bg-My-very-dark-desaturated-blue-background-toggle-keypad;
+}
+.button1-theme1 {
+  @apply border-My-desaturated-dark-blue-button-shadow bg-My-desaturated-dark-blue-button text-white;
+}
+.button2-theme1 {
+  @apply border-My-grayish-orange-button-shadow bg-My-light-grayish-orange-button text-My-very-dark-grayish-yellow-text;
+}
+.button3-theme1 {
+  @apply border-My-dark-red-button-shadow bg-My-red-button text-white;
+}
+.text-theme1 {
+  @apply text-My-white;
+}
+.text-theme1-blue {
+  @apply text-My-very-dark-grayish-blue-text;
+}
+
+/* Theme 2 - Magenta */
+
+.background-theme2 {
+  @apply bg-My-light-gray-background;
+}
+.calculator-theme2 {
+  @apply bg-My-grayish-red-background-toggle-keypad;
+}
+.screen-theme2 {
+  @apply bg-My-very-light-gray-background-screen;
+}
+.toggle-theme2 {
+  @apply bg-My-grayish-red-background-toggle-keypad;
+}
+.button1-theme2 {
+  @apply border-My-very-dark-cyan-button-shadow bg-My-dark-moderate-cyan-button text-My-white;
+}
+.button2-theme2 {
+  @apply border-My-dark-grayish-orange-button-shadow bg-My-light-grayish-yellow-button;
+}
+
+.button3-theme2 {
+  @apply border-My-dark-orange-button-shadow bg-My-orange-button text-My-white;
+}
+.text-theme2 {
+  @apply text-My-very-dark-grayish-yellow-text;
+}
+
+/* Theme 3 - Magenta */
+.background-theme3 {
+  @apply bg-My-very-dark-violet-background;
+}
+.calculator-theme3 {
+  @apply bg-My-very-dark-violet-toggle-keypad-screen-background;
+}
+.screen-theme3 {
+  @apply bg-My-very-dark-violet-toggle-keypad-screen-background;
+}
+.toggle-theme3 {
+  @apply bg-My-very-dark-violet-toggle-keypad-screen-background;
+}
+.button1-theme3 {
+  @apply border-My-vivid-magenta-shadow bg-My-dark-violet-button text-My-white;
+}
+.button2-theme3 {
+  @apply border-My-dark-magenta-shadow bg-My-very-dark-violet-button;
+}
+
+.button3-theme3 {
+  @apply border-My-soft-cyan-shadow bg-My-pure-cyan-button text-My-very-dark-blue-text;
+}
+
+.text-theme3 {
+  @apply text-My-light-yellow-text;
 }
 </style>
