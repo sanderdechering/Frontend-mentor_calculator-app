@@ -22,7 +22,7 @@ Users should be able to:
 ### What I learned
 
 The calculator is one that I developed for the first time with Javascript. My first iteration was one that I came up by myself, one that I have not included here, but after struggling I looked up how people usually build these thing. The eval() function was one
-that I have never heard of, so using this function here made the calculator app a lot easier to build. Also, adding a toggle button that doesn't toggle between true or false, but between 1,2,3 was something new.
+that I have never heard of, so using this function here made the calculator app a lot easier to build. Also, adding a toggle button that doesn't toggle between true or false, but between 1,2,3 was something new. 
 
 ## Author
 
